@@ -6,7 +6,7 @@ Detect Air quality ,humidity , temperature and calculation comfort level.
 - [i2c kernel documentation](https://www.kernel.org/doc/Documentation/i2c/dev-interface)
 - [Official SHT31 c++ library for Arduino](https://github.com/adafruit/Adafruit_SHT31)
 - [SHT31 manufacturer data sheet](https://www.sensirion.com/fileadmin/user_upload/customers/sensirion/Dokumente/Humidity_and_Temperature_Sensors/Sensirion_Humidity_and_Temperature_Sensors_SHT3x_Datasheet_digital.pdf)
-- [KQM2801AI c library for Raspberry PI] https://github.com/oknow23/KQM2801AI
+- [KQM2801AI c library for Raspberry PI](https://github.com/oknow23/KQM2801AI)
 - [KQM2801AI data sheet](http://img005.hc360.cn/k2/M0D/FB/D8/wKhQxVirxHKEUAAnAAAAAFukSmo241.pdf)
 ## Prerequisites ##
  
@@ -30,16 +30,16 @@ put AirBox and lcdi2c in the same place.
 - ./AirBox
 
 ## LCD result show case ##
- ──────────────────
-∣ 25°C	49% 10.6PP ∣
-∣ Comfo  ok Bad    ∣
- ──────────────────
+-  ──────────────────
+- ∣ 25°C	49% 10.6PP  ∣
+- ∣ Comfo  ok Bad    ∣
+-  ──────────────────
 
 Explain:
- 25°C	← Temperature
- 49%	← Humidity
- 10.6PP	← PPM
- Comfo 	← Comfort level
- ok 	← Humidity level
- Bad	← Air quality
+- 25°C		← Temperature
+- 49%		← Humidity
+- 10.6PP	← PPM
+- Comfo 	← Comfort level
+- ok 		← Humidity level
+- Bad		← Air quality
  
