@@ -90,6 +90,7 @@ kqm2801rtn kqm2801_writeandread(int fp, uint8_t *buffer, int readsize)
 kqm2801rtn getDensity( float *density,char *level)
 {
   uint8_t buf[10];
+  char cmd[128];
   int rtn;
   int file;
 
@@ -98,13 +99,14 @@ kqm2801rtn getDensity( float *density,char *level)
   rtn = kqm2801_writeandread(file, buf, 8);
   kqm2801_close(file);
 
+  *density = 0;
+
   if (rtn != KQM2801_OK)
     return rtn;
   else {
     if( buf[0] == 0x5f){  //pass
   
       if( buf[1] == 0xff && buf[2] == 0xff ){  //wait for the module preheat
-        *density = 0;
         sprintf(level,"Wait");
       }
       else{
@@ -116,10 +118,19 @@ kqm2801rtn getDensity( float *density,char *level)
           sprintf(level,"Clean"); //0
         else if( *density <= 8)
           sprintf(level,"Good "); //1;
-        else if( *density <= 15)
+        else if( *density <= 15){
           sprintf(level,"Bad  ");
-        else if( *density > 15)
+
+          /* linebot msg */
+          sprintf(cmd,"python2 line_bot.py '注意!: 空氣品質:%s 請開空濾!' ",level);
+          system(cmd);
+        }
+        else if( *density > 15){
           sprintf(level,"Dange");  //Danger
+          /* linebot msg */
+          sprintf(cmd,"python2 line_bot.py '注意!: 空氣品質:%s 請開空濾!' ",level);
+          system(cmd);
+        }
       }
     }
     else{

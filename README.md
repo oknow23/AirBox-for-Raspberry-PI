@@ -21,6 +21,11 @@ Below is also a good one to have while debugging, but be careful i2cdump from th
 Download lcdi2c library
 - wget http://telecnatron.com/articles/Utility-To-Control-1602-LCD-On-Raspberry-Pi-Via-A-PCF8574-I2C-Backpack-Module/lcdi2c
 
+install pip and line-bot-sdk for Line bot
+- wget https://bootstrap.pypa.io/get-pip.py
+- python2 get-pip.py
+- pip install line-bot-sdk
+
 ## Build ##
 - make
 will output AirBox execute file.

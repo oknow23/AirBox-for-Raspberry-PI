@@ -20,6 +20,7 @@ void printtempandhumidity(int file);
 void printstatus(int file);
 void printserialnum(int file);
 void printBitStatus(uint16_t stat);
+char cmd[128];
 
 void printusage(char *selfname)
 {
@@ -61,6 +62,10 @@ int comfort_level(float T/* Tempture */,float RH/* Humidity */,char *level)
   }
   else if( THI >= 31){
     sprintf(level,"Heat+"); //Heatstroke
+    
+    /* linebot msg */
+    sprintf(cmd,"python2 line_bot.py '注意!: 溫度:%.0f°C 請開冷氣!' ",T);
+    system(cmd);
   }
 
   return 0;
@@ -76,6 +81,10 @@ int humidity_level(float humi,char *level)
   }
   else if( humi >= 71 ){
     sprintf(level,"Wet"); //wet
+
+    /* linebot msg */
+    sprintf(cmd,"python2 line_bot.py '注意!: 濕度:%.0f% 請開除濕機!' ",humi);
+    system(cmd);
   }
 
   return 0;
