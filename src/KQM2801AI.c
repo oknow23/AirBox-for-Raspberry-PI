@@ -26,6 +26,7 @@
 
 #include "KQM2801AI.h"
 
+static float sDensity = 0;
 
 /*
  * kqm2801_open:
@@ -122,14 +123,20 @@ kqm2801rtn getDensity( float *density,char *level)
           sprintf(level,"Bad  ");
 
           /* linebot msg */
-          sprintf(cmd,"python2 line_bot.py '注意!: 空氣品質:%s 請開空濾!' ",level);
-          system(cmd);
+          if( (int)sDensity != (int)*density ){
+            sDensity = *density;
+            sprintf(cmd,"python2 line_bot.py '注意!: 空氣品質:%s 請開空濾!' ",level);
+            system(cmd);
+          }
         }
         else if( *density > 15){
           sprintf(level,"Dange");  //Danger
           /* linebot msg */
-          sprintf(cmd,"python2 line_bot.py '注意!: 空氣品質:%s 請開空濾!' ",level);
-          system(cmd);
+          if( (int)sDensity != (int)*density ){
+            sDensity = *density;
+            sprintf(cmd,"python2 line_bot.py '注意!: 空氣品質:%s 請開空濾!' ",level);
+            system(cmd);
+          }
         }
       }
     }

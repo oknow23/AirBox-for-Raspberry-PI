@@ -16,6 +16,9 @@
 
 #define CHECK_BIT(var,pos) (((var)>>(pos)) & 1)
 
+static float sTemp = 0;
+static float sHumi = 0;
+
 void printtempandhumidity(int file);
 void printstatus(int file);
 void printserialnum(int file);
@@ -64,8 +67,11 @@ int comfort_level(float T/* Tempture */,float RH/* Humidity */,char *level)
     sprintf(level,"Heat+"); //Heatstroke
     
     /* linebot msg */
-    sprintf(cmd,"python2 line_bot.py '注意!: 溫度:%.0f°C 請開冷氣!' ",T);
-    system(cmd);
+    if( sTemp != T){
+      sprintf(cmd,"python2 line_bot.py '注意!: 溫度:%.0f°C 請開冷氣!' ",T);
+      system(cmd);
+      sTemp = T;
+    }
   }
 
   return 0;
@@ -83,8 +89,11 @@ int humidity_level(float humi,char *level)
     sprintf(level,"Wet"); //wet
 
     /* linebot msg */
-    sprintf(cmd,"python2 line_bot.py '注意!: 濕度:%.0f% 請開除濕機!' ",humi);
-    system(cmd);
+    if( sHumi != humi){
+      sprintf(cmd,"python2 line_bot.py '注意!: 濕度:%.0f% 請開除濕機!' ",humi);
+      system(cmd);
+      sHumi = humi;
+    }
   }
 
   return 0;
